@@ -8,7 +8,7 @@
 -- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
+START TRANSACTION; 
 SET time_zone = "+00:00";
 
 
@@ -99,7 +99,7 @@ CREATE TABLE `v_mobil_konvensional` (
 -- Structure for view `v_mobil_konvensional`
 --
 DROP TABLE IF EXISTS `v_mobil_konvensional`;
-
+ 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_mobil_konvensional`  AS SELECT `mobil_konvensional`.`id_kendaraan` AS `id_kendaraan`, `mobil_konvensional`.`brand` AS `brand`, `mobil_konvensional`.`model` AS `model`, `mobil_konvensional`.`tahun` AS `tahun`, `mobil_konvensional`.`harga_dasar` AS `harga_dasar`, `mobil_konvensional`.`kapasitas_mesin` AS `kapasitas_mesin`, `mobil_konvensional`.`jenis_bahan_bakar` AS `jenis_bahan_bakar`, ((0.02 * `mobil_konvensional`.`harga_dasar`) + (`mobil_konvensional`.`kapasitas_mesin` * 500)) AS `pajak_tahunan` FROM `mobil_konvensional``mobil_konvensional`  ;
 
 --

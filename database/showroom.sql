@@ -3,12 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 12, 2026 at 04:18 AM
+-- Generation Time: Jun 12, 2026 at 02:12 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION; 
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -65,6 +65,18 @@ CREATE TABLE `mobil_listrik` (
   `jarak_tempuh` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `mobil_listrik`
+--
+
+INSERT INTO `mobil_listrik` (`id_kendaraan`, `brand`, `model`, `tahun`, `harga_dasar`, `kapasitas_baterai`, `jarak_tempuh`) VALUES
+('EV-001', 'Tesla', 'Model 3 Long Range', 2023, 850000000.00, 75, 576),
+('EV-002', 'Hyundai', 'Ioniq 5 Signature', 2024, 780000000.00, 72.6, 481),
+('EV-003', 'Wuling', 'Air EV Long Range', 2023, 275000000.00, 26.7, 300),
+('EV-004', 'BYD', 'Atto 3 Superior', 2024, 515000000.00, 60.48, 480),
+('EV-005', 'Nissan', 'Leaf', 2022, 738000000.00, 40, 311),
+('EV-006', 'MG', '4 EV Magnify', 2024, 433000000.00, 51, 425);
+
 -- --------------------------------------------------------
 
 --
@@ -85,46 +97,13 @@ CREATE TABLE `motor_besar` (
 -- Dumping data for table `motor_besar`
 --
 
-<<<<<<< HEAD:database/showroom_db.sql
--- --------------------------------------------------------
-
---
--- Structure for view `v_mobil_konvensional`
---
-DROP TABLE IF EXISTS `v_mobil_konvensional`;
- 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_mobil_konvensional`  AS SELECT `mobil_konvensional`.`id_kendaraan` AS `id_kendaraan`, `mobil_konvensional`.`brand` AS `brand`, `mobil_konvensional`.`model` AS `model`, `mobil_konvensional`.`tahun` AS `tahun`, `mobil_konvensional`.`harga_dasar` AS `harga_dasar`, `mobil_konvensional`.`kapasitas_mesin` AS `kapasitas_mesin`, `mobil_konvensional`.`jenis_bahan_bakar` AS `jenis_bahan_bakar`, ((0.02 * `mobil_konvensional`.`harga_dasar`) + (`mobil_konvensional`.`kapasitas_mesin` * 500)) AS `pajak_tahunan` FROM `mobil_konvensional``mobil_konvensional`  ;
-=======
 INSERT INTO `motor_besar` (`id_kendaraan`, `brand`, `model`, `tahun`, `harga_dasar`, `tipe_rantai`, `mode_berkendara`) VALUES
-('KND005', 'Honda', 'CBR600RR', 2021, 550000000.00, 'O-Ring', 'Sport'),
-('KND006', 'Kawasaki', 'Ninja ZX-10R', 2022, 560000000.00, 'X-Ring', 'Race'),
-('KND011', 'Yamaha', 'YZF-R1', 2022, 605000000.00, 'X-Ring', 'Track'),
-('KND012', 'Harley-Davidson', 'Iron 883', 2021, 400000000.00, 'Belt Drive', 'Cruise'),
-('KND017', 'BMW Motorrad', 'R 1250 GS', 2022, 850000000.00, 'Shaft Drive', 'Eco/Rain/Road'),
-('KND018', 'Ducati', 'Panigale V4', 2023, 840000000.00, '525 Chain', 'Race/Sport');
->>>>>>> cb6a67b83af3fc487d483a5cf1ea500eb0589da4:database/showroom.sql
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `mobil_konvensional`
---
-ALTER TABLE `mobil_konvensional`
-  ADD PRIMARY KEY (`id_kendaraan`);
-
---
--- Indexes for table `mobil_listrik`
---
-ALTER TABLE `mobil_listrik`
-  ADD PRIMARY KEY (`id_kendaraan`);
-
---
--- Indexes for table `motor_besar`
---
-ALTER TABLE `motor_besar`
-  ADD PRIMARY KEY (`id_kendaraan`);
+('MTR-001', 'Honda', 'EM1 e: Plus', 2024, 40000000.00, 'Heavy Duty', 'Econ, Standard'),
+('MTR-002', 'Kawasaki', 'Ninja e-1', 2023, 149000000.00, 'O-ring Chain', 'Eco, Road'),
+('MTR-003', 'Alva', 'Cervo', 2024, 42750000.00, 'Drive Belt', 'Eco, Urban, Sport'),
+('MTR-004', 'United', 'T1800', 2023, 30500000.00, 'Standard Roller', 'Eco, Normal, Sport'),
+('MTR-005', 'Gesits', 'Raya G', 2024, 28000000.00, 'Belt Drive', 'Eco, Urban'),
+('MTR-006', 'Pacific', 'Whiz', 2023, 18000000.00, 'Standard Chain', 'Eco, Normal');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

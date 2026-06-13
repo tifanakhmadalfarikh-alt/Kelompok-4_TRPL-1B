@@ -1,18 +1,27 @@
 <?php
-// Konfigurasi Database (Default XAMPP)
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "showroom_db"; // Disamakan dengan nama file showroom_db.sql kamu
 
-// Membuat koneksi ke MySQL
-$conn = mysqli_connect($host, $user, $pass, $db);
+class Koneksi {
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "showroom"; // Pastikan namanya sesuai dengan di phpMyAdmin
 
-// Memeriksa apakah koneksi berhasil
-if (!$conn) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+    protected $conn;
+
+    public function __construct() {
+        // Membuat koneksi menggunakan gaya OOP
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database);
+
+        // Mengecek apakah koneksi berhasil
+        if ($this->conn->connect_error) {
+            die("Koneksi database gagal: " . $this->conn->connect_error);
+        }
+    }
+
+    // Fungsi untuk memberikan akses koneksi ke file OOP lain
+    public function getConnection() {
+        return $this->conn;
+    }
 }
 
-// Catatan: Jika koneksi berhasil, halaman akan kosong (putih bersih). 
-// Itu tandanya koneksi sudah aman dan siap digunakan di file lain.
 ?>

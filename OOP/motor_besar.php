@@ -1,20 +1,22 @@
 <?php
-require_once 'Kendaraan.php';
+require_once 'kendaraan.php';
 
 class MotorBesar extends Kendaraan {
+    // Atribut tambahan khusus Motor Besar
     protected string $tipeRantai;
     protected string $modeBerkendara;
 
-    public function setMotorBesarValues(string $tipeRantai, string $modeBerkendara): void {
-        $this->tipeRantai = $tipeRantai;
-        $this->modeBerkendara = $modeBerkendara;
+    public function setMotorBesarValues(string $rantai, string $mode): void {
+        $this->tipeRantai = $rantai;
+        $this->modeBerkendara = $mode;
     }
 
+    // OVERRIDING: Rumus pajak 1.5% * hargaDasar
     public function hitungPajakTahunan(): float {
-        // Contoh: Pajak motor besar bertarif 1.5% dari harga dasar
         return 0.015 * $this->hargaDasar;
     }
 
+    // OVERRIDING: Tampilkan spesifikasi
     public function tampilkanSpesifikasi(): void {
         echo "Motor Besar: " . $this->brand . " " . $this->model . " (" . $this->tahun . ") - Rantai: " . $this->tipeRantai . ", Mode: " . $this->modeBerkendara . ".";
     }

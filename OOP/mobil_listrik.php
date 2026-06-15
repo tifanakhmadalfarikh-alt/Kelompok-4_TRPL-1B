@@ -1,26 +1,43 @@
 <?php
-require_once 'Kendaraan.php';
+require_once '../koneksi/Koneksi.php'; 
+require_once 'kendaraan.php';
 
 class MobilListrik extends Kendaraan {
-    protected float $kapasitasBaterai;
-    protected int $jarakTempuh;
+    
+    public $kapasitasBaterai;
+    public $jarakTempuh;
 
-    public function setMobilListrikValues(float $kapasitasBaterai, int $jarakTempuh): void {
-        $this->kapasitasBaterai = $kapasitasBaterai;
-        $this->jarakTempuh = $jarakTempuh;
+    public function __construct($id_kendaraan = "", $brand = "", $model = "", $tahun = "", $hargaDasar = 0, $kapasitasBaterai = 0, $jarakTempuh = 0) {
+        if($id_kendaraan != "") {
+            parent::__construct($id_kendaraan, $brand, $model, $tahun, $hargaDasar);
+            $this->kapasitasBaterai = $kapasitasBaterai;
+            $this->jarakTempuh = $jarakTempuh;
+        }
     }
 
-    public function hitungPajakTahunan(): float {
-        // Contoh: Pajak mobil listrik sangat murah, misal 0.1% dari harga dasar
-        return 0.001 * $this->hargaDasar;
+    public function hitungPajakTahunan() {
+        return 0.005 * $this->hargaDasar;
     }
 
-    public function tampilkanSpesifikasi(): void {
-        echo "Mobil Listrik: " . $this->brand . " " . $this->model . " (" . $this->tahun . ") - Baterai: " . $this->kapasitasBaterai . " kWh, Jarak Tempuh: " . $this->jarakTempuh . " km.";
+    // INI FUNGSI YANG TADI MENGHILANG DAN BIKIN ERROR
+    public function tampilkanSpesifikasi() {
+        return "Baterai: " . $this->kapasitasBaterai . " kWh | Jarak: " . $this->jarakTempuh . " km";
     }
 
-    // Getter tambahan untuk view
-    public function getKapasitasBaterai(): float { return $this->kapasitasBaterai; }
-    public function getJarakTempuh(): int { return $this->jarakTempuh; }
+    public function tampilkanSemuaData() {
+        $database = new Koneksi();
+        $conn = $database->getConnection(); 
+        
+        $query = "SELECT * FROM mobil_listrik";
+        $result = $conn->query($query);
+        $data = []; 
+        
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data; 
+    }
 }
 ?>

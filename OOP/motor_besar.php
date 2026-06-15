@@ -1,28 +1,42 @@
 <?php
+require_once '../koneksi/Koneksi.php'; 
 require_once 'kendaraan.php';
 
 class MotorBesar extends Kendaraan {
-    // Atribut tambahan khusus Motor Besar
-    protected string $tipeRantai;
-    protected string $modeBerkendara;
+    
+    public $tipeRantai;
+    public $modeBerkendara;
 
-    public function setMotorBesarValues(string $rantai, string $mode): void {
-        $this->tipeRantai = $rantai;
-        $this->modeBerkendara = $mode;
+    public function __construct($id_kendaraan = "", $brand = "", $model = "", $tahun = "", $hargaDasar = 0, $tipeRantai = "", $modeBerkendara = "") {
+        if($id_kendaraan != "") {
+            parent::__construct($id_kendaraan, $brand, $model, $tahun, $hargaDasar);
+            $this->tipeRantai = $tipeRantai;
+            $this->modeBerkendara = $modeBerkendara;
+        }
     }
 
-    // OVERRIDING: Rumus pajak 1.5% * hargaDasar
-    public function hitungPajakTahunan(): float {
+    public function hitungPajakTahunan() {
         return 0.015 * $this->hargaDasar;
     }
 
-    // OVERRIDING: Tampilkan spesifikasi
-    public function tampilkanSpesifikasi(): void {
-        echo "Motor Besar: " . $this->brand . " " . $this->model . " (" . $this->tahun . ") - Rantai: " . $this->tipeRantai . ", Mode: " . $this->modeBerkendara . ".";
+    public function tampilkanSpesifikasi() {
+        return "Rantai: " . $this->tipeRantai . " | Mode: " . $this->modeBerkendara;
     }
 
-    // Getter tambahan untuk view
-    public function getTipeRantai(): string { return $this->tipeRantai; }
-    public function getModeBerkendara(): string { return $this->modeBerkendara; }
+    public function tampilkanSemuaData() {
+        $database = new Koneksi();
+        $conn = $database->getConnection(); 
+        
+        $query = "SELECT * FROM motor_besar";
+        $result = $conn->query($query);
+        $data = []; 
+        
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data; 
+    }
 }
 ?>

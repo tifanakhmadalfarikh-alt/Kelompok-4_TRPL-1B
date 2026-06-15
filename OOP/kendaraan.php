@@ -1,29 +1,27 @@
 <?php
-abstract class Kendaraan {
-    protected string $idKendaraan;
-    protected string $brand;
-    protected string $model;
-    protected int $tahun;
-    protected float $hargaDasar;
 
-    // Method untuk mengisi data dasar dari database
-    public function setBaseValues(string $id, string $brand, string $model, int $tahun, float $hargaDasar): void {
-        $this->idKendaraan = $id;
+// Menggunakan keyword 'abstract' sesuai kriteria soal
+abstract class Kendaraan {
+    
+    // Atribut dasar yang diwariskan ke semua subclass (menggunakan protected agar bisa diakses oleh subclass)
+    protected $id_kendaraan;
+    protected $brand;
+    protected $model;
+    protected $tahun;
+    protected $hargaDasar;
+
+    // Constructor untuk inisialisasi data saat objek kendaraan dibuat
+    public function __construct($id_kendaraan, $brand, $model, $tahun, $hargaDasar) {
+        $this->id_kendaraan = $id_kendaraan;
         $this->brand = $brand;
         $this->model = $model;
         $this->tahun = $tahun;
         $this->hargaDasar = $hargaDasar;
     }
 
-    // Getter untuk digunakan di halaman view/dashboard
-    public function getIdKendaraan(): string { return $this->idKendaraan; }
-    public function getBrand(): string { return $this->brand; }
-    public function getModel(): string { return $this->model; }
-    public function getTahun(): int { return $this->tahun; }
-    public function getHargaDasar(): float { return $this->hargaDasar; }
-
-    // Method abstrak yang wajib diimplementasikan oleh semua subclass
-    abstract public function hitungPajakTahunan(): float;
-    abstract public function tampilkanSpesifikasi(): void;
+    // Abstract method: Ini adalah "kontrak wajib" dari dosen. 
+    // Subclass (MobilKonvensional, MobilListrik, dll) WAJIB membuat isi dari fungsi ini nanti.
+    abstract public function hitungPajakTahunan();
+    abstract public function tampilkanSpesifikasi();
 }
 ?>
